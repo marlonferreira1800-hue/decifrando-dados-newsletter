@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Preview da Newsletter</title>
+    <style>
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, sans-serif;
+            line-height: 1.5;
+            color: rgba(0,0,0,0.9);
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f3f2ef;
+        }
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+        }
+        .toolbar {
+            position: sticky;
+            top: 20px;
+            margin-bottom: 20px;
+            text-align: right;
+            z-index: 100;
+        }
+        .btn {
+            background: #0a66c2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #004182;
+        }
+        
+        #content h1 { font-size: 24px; font-weight: 600; margin: 24px 0 16px; }
+        #content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 16px; }
+        #content h3 { font-size: 18px; font-weight: 600; margin: 24px 0 16px; }
+        #content p { margin-bottom: 16px; font-size: 16px; }
+        #content ul { margin-bottom: 16px; padding-left: 24px; }
+        #content li { margin-bottom: 8px; font-size: 16px; }
+        #content img { max-width: 100%; height: auto; border-radius: 8px; margin: 16px 0; display: block; }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <a href="https://www.linkedin.com/article/new/" target="_blank" class="btn" onclick="copyContent(this)">1. Copiar Formatação e 2. Abrir LinkedIn</a>
+    </div>
+    <div class="container" id="content">
+        <h1>🧠 O Insight da Semana</h1>
+<p>Todo mundo quer colocar Inteligência Artificial em produção, mas quase ninguém olha para o painel de faturamento da AWS até chegar o boleto. A dura realidade que o mercado está engolindo a seco é: a nuvem mal configurada está sangrando as empresas por dentro. Projetos brilhantes de Machine Learning estão sendo desligados não porque o modelo sofre de <em>data drift</em>, mas porque o custo de manter a infraestrutura rodando destruiu qualquer margem de lucro.</p>
+<p>Nós passamos anos otimizando pipelines para serem mais rápidos. Reduzimos o tempo de execução de horas para minutos. O problema é que, no modelo de precificação atual da nuvem, velocidade sem controle financeiro é suicídio. Aquele cluster de Spark que você deixou ligado durante o final de semana para "agilizar na segunda-feira", ou aquela tabela não particionada que todo cientista de dados faz um <em>full scan</em> diário, são vazamentos de caixa invisíveis. </p>
+<p>O engenheiro de dados moderno não pode mais ser apenas o cara que move dados do ponto A pro ponto B. Ele precisa ser um gestor de recursos. Se o seu pipeline processa terabytes de dados para entregar um dashboard que três pessoas olham uma vez por mês, você não construiu uma solução. Você construiu um passivo financeiro. FinOps deixou de ser buzzword de gestor de TI e virou habilidade de sobrevivência técnica.</p>
+<h1>📡 Radar: O Que Você Precisa Saber</h1>
+<p><strong>💸 [Fim da Festa] O cemitério de projetos GenAI por falta de ROI</strong>
+<em>O que é:</em> Consultorias apontam uma onda de cancelamentos de iniciativas envolvendo grandes modelos de linguagem (LLMs) em produção.
+<em>O Impacto:</em> A empolgação passou. Empresas perceberam que chamar a API de um LLM gigantesco para classificar milhões de linhas de texto custa uma fortuna. O jogo agora é migrar para modelos menores, rodando localmente (como Llama 3 8B) e fazer <em>fine-tuning</em>. O melhor modelo não é o mais inteligente do mundo, é o que resolve o problema sem quebrar a empresa.</p>
+<p><strong>🚧 [Travas de Segurança] Warehouses assumem a responsabilidade</strong>
+<em>O que é:</em> Plataformas como Snowflake e BigQuery estão aprimorando funcionalidades nativas de hard limits e cotas de uso por usuário ou projeto.
+<em>O Impacto:</em> Acabou a desculpa do "ops, não sabia que essa query ia ler 50 TB". Engenheiros de dados estão colocando limites rígidos na infraestrutura. Bateu a cota diária? O pipeline falha e barra o usuário. É melhor lidar com um alerta no Airflow do que com uma fatura surpresa de 10 mil dólares no fim do mês.</p>
+<p><strong>📈 [Novo Requisito] FinOps nos requisitos das vagas</strong>
+<em>O que é:</em> Recrutadores estão adicionando "Cloud Cost Optimization" nas descrições de vagas para Engenheiros e Cientistas de Dados Sênior.
+<em>O Impacto:</em> Saber escrever código PySpark otimizado não basta mais. Você precisa saber configurar regras de ciclo de vida no S3 (movendo dado frio pro Glacier), entender como usar instâncias <em>spot</em> e desenhar arquiteturas que escalam para baixo (<em>scale-in</em>) tão rápido quanto sobem.</p>
+<h1>🛠️ Mão na Massa (Pragmatismo)</h1>
+<p>Quer evitar uma demissão por justa causa por motivos de "faliu a empresa no BigQuery"? Duas travas de segurança simples que você deve configurar hoje:</p>
+<ol>
+<li><strong>Forçar Filtro de Partição:</strong> Nunca crie uma tabela gigantesca sem exigir que quem for consultar use a chave de partição. No BigQuery, ao criar a tabela, ative a opção <code>require_partition_filter = true</code>. Se o analista tentar dar um <code>SELECT *</code> sem o <code>WHERE</code> na data, a query simplesmente se recusa a rodar.</li>
+<li><strong>Ciclo de Vida de Storage:</strong> Acesse agora o seu bucket S3 (ou GCS) onde caem os dados raw. Crie uma regra de <em>Lifecycle</em> automática: dados com mais de 30 dias vão para a classe de armazenamento Infrequent Access. Mais de 90 dias? Glacier (ou Archive). O dado continua lá, mas o custo de armazenamento cai drasticamente. Não confie na memória humana para apagar arquivos antigos.</li>
+</ol>
+<h1>💬 Debate da Semana</h1>
+<p>Aquele momento de pânico quando você percebe o que acabou de rodar e tenta cancelar o job correndo. Conta aqui nos comentários: qual foi a query ou cluster mais caro que você já deixou rodando por engano (ou viu alguém fazer)? O espaço é seguro e a gente jura que não manda o print pro seu CTO.</p>
+    </div>
+    <script>
+        function copyContent(linkElement) {
+            const contentDiv = document.getElementById('content');
+            const range = document.createRange();
+            range.selectNodeContents(contentDiv);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                linkElement.innerHTML = '✔ Copiado! Agora cole (Ctrl+V) no LinkedIn';
+                linkElement.style.background = '#057642'; 
+                setTimeout(function() { selection.removeAllRanges(); }, 100);
+            } catch (err) {
+                alert('Erro ao copiar: ' + err);
+            }
+        }
+    </script>
+</body>
+</html>

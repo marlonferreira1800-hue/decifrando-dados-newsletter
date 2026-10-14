@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Preview da Newsletter</title>
+    <style>
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, sans-serif;
+            line-height: 1.5;
+            color: rgba(0,0,0,0.9);
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f3f2ef;
+        }
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+        }
+        .toolbar {
+            position: sticky;
+            top: 20px;
+            margin-bottom: 20px;
+            text-align: right;
+            z-index: 100;
+        }
+        .btn {
+            background: #0a66c2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #004182;
+        }
+        
+        #content h1 { font-size: 24px; font-weight: 600; margin: 24px 0 16px; }
+        #content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 16px; }
+        #content h3 { font-size: 18px; font-weight: 600; margin: 24px 0 16px; }
+        #content p { margin-bottom: 16px; font-size: 16px; }
+        #content ul { margin-bottom: 16px; padding-left: 24px; }
+        #content li { margin-bottom: 8px; font-size: 16px; }
+        #content img { max-width: 100%; height: auto; border-radius: 8px; margin: 16px 0; display: block; }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <a href="https://www.linkedin.com/article/new/" target="_blank" class="btn" onclick="copyContent(this)">1. Copiar Formatação e 2. Abrir LinkedIn</a>
+    </div>
+    <div class="container" id="content">
+        <h1>Le Chonk vs GPT-6: A guerra dos modelos Open Source Europeus na arquitetura de dados</h1>
+<p><strong>🧠 O Insight da Semana</strong></p>
+<p>A OpenAI jogou a toalha na transparência de vez com o GPT-6. É uma caixa preta caríssima que te obriga a trafegar os dados mais sensíveis da sua empresa por uma API que você não controla. Do outro lado do Atlântico, a resposta da comunidade open source europeia atende pelo apelido carinhoso (e preciso) de "Le Chonk": um modelo aberto gigantesco, pesado para rodar, mas que fica no seu próprio quintal.</p>
+<p>O hype no Twitter é sempre sobre quem passa no exame da Ordem dos Advogados com nota maior. Bobagem pura. Para quem de fato desenha arquiteturas de dados, a briga entre GPT-6 e modelos massivos como o Le Chonk é outra. A decisão não é sobre inteligência abstrata. É sobre latência de rede versus custo de processamento. É sobre governança pesada.</p>
+<p>Se você depende de um LLM no meio do seu pipeline do Airflow para extrair entidades de documentos não estruturados, mandar PII (dados pessoais) para fora da sua VPC via API é flertar com a ruína de compliance. O Le Chonk exige um cluster de GPUs potente? Sim, o custo de infra é alto. Mas ele faz o trabalho sujo mantendo seus dados protegidos, com zero latência de rede. A verdadeira guerra hoje não é de benchmarks. É sobre quem controla a camada semântica da sua empresa sem quebrar o caixa.</p>
+<p><strong>📡 Radar: O Que Você Precisa Saber</strong></p>
+<p><strong>🇫🇷 Le Chonk vaza e choca o mercado corporativo</strong>
+<em>O que é:</em> O modelo europeu open-weight massivo finalmente teve seus pesos liberados, exigindo hardware de respeito, mas rivalizando com modelos fechados em raciocínio.
+<em>O Impacto:</em> Acabou a desculpa de "só a OpenAI resolve o nosso problema". Times de Engenharia de Dados agora podem (e devem) justificar o orçamento para clusters de GPU in-house. O poder computacional finalmente voltou para as mãos de quem cuida dos dados.</p>
+<p><strong>💸 O pedágio silencioso da Batch API do GPT-6</strong>
+<em>O que é:</em> Novos limites de rate e custos ocultos para processamento assíncrono em larga escala via GPT-6.
+<em>O Impacto:</em> Se você usa LLM para limpar dados ou enriquecer tabelas rodando jobs noturnos via dbt, prepare o bolso. A conta de cloud vai estourar se você não diversificar os provedores e testar roteamento inteligente de modelos.</p>
+<p><strong>🏗️ dbt adiciona suporte nativo para chamadas locais de LLMs</strong>
+<em>O que é:</em> Nova integração que facilita rodar inferência de modelos hospedados internamente direto dos modelos SQL do dbt.
+<em>O Impacto:</em> Facilita absurdamente a vida do Analytics Engineer. Você não precisa mais construir uma gambiarra em Python gigante só para fazer um parse semântico simples. Chama o Le Chonk direto da sua transformação.</p>
+<p><strong>🛠️ Mão na Massa (Pragmatismo)</strong></p>
+<p>Quer testar a viabilidade do Le Chonk no seu pipeline de dados sem derreter o cartão de crédito da empresa com instâncias H100? Ignore os pesos originais (FP16). </p>
+<p>Vá direto para quantização GGUF ou AWQ. Suba o vLLM (ou Ollama, se preferir algo mais rápido para prototipar) em uma máquina modesta da cloud com uma GPU L4 ou A10G. Pegue um batch de 10.000 registros sujos do seu Data Lakehouse e rode a inferência localmente. Meça a latência total e cruze com o que você pagaria enviando a mesma carga para a API da OpenAI. Você vai descobrir que a quantização tornou a soberania de dados surpreendentemente barata.</p>
+<p><strong>💬 Debate da Semana</strong></p>
+<p>Seja sincero: o que tira mais o seu sono hoje? O risco de vazar dados mandando tabelas inteiras via API para provedores fechados, ou o inferno que é gerenciar infraestrutura de GPU dentro da própria empresa?</p>
+    </div>
+    <script>
+        function copyContent(linkElement) {
+            const contentDiv = document.getElementById('content');
+            const range = document.createRange();
+            range.selectNodeContents(contentDiv);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                linkElement.innerHTML = '✔ Copiado! Agora cole (Ctrl+V) no LinkedIn';
+                linkElement.style.background = '#057642'; 
+                setTimeout(function() { selection.removeAllRanges(); }, 100);
+            } catch (err) {
+                alert('Erro ao copiar: ' + err);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Preview da Newsletter</title>
+    <style>
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, sans-serif;
+            line-height: 1.5;
+            color: rgba(0,0,0,0.9);
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f3f2ef;
+        }
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+        }
+        .toolbar {
+            position: sticky;
+            top: 20px;
+            margin-bottom: 20px;
+            text-align: right;
+            z-index: 100;
+        }
+        .btn {
+            background: #0a66c2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #004182;
+        }
+        
+        #content h1 { font-size: 24px; font-weight: 600; margin: 24px 0 16px; }
+        #content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 16px; }
+        #content h3 { font-size: 18px; font-weight: 600; margin: 24px 0 16px; }
+        #content p { margin-bottom: 16px; font-size: 16px; }
+        #content ul { margin-bottom: 16px; padding-left: 24px; }
+        #content li { margin-bottom: 8px; font-size: 16px; }
+        #content img { max-width: 100%; height: auto; border-radius: 8px; margin: 16px 0; display: block; }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <a href="https://www.linkedin.com/article/new/" target="_blank" class="btn" onclick="copyContent(this)">1. Copiar Formatação e 2. Abrir LinkedIn</a>
+    </div>
+    <div class="container" id="content">
+        <h1>Decifrando Dados</h1>
+<h3>🧠 O Insight da Semana</h3>
+<p>Passamos a última década inteira movendo dados de um lado para o outro. Extrai do Postgres. Joga num bucket S3. Roda Spark. Salva no Data Warehouse. A grande muralha entre o mundo transacional (OLTP) e o analítico (OLAP) sustentou a criação de dezenas de ferramentas. Kafka, Airflow, Debezium, dbt. Tudo isso, no fundo, só existe porque bancos transacionais e analíticos não sabiam compartilhar o mesmo disco de forma eficiente.</p>
+<p>Mas algo interessante está acontecendo. A arquitetura de <em>Lakebases</em> (ou integração Zero-Copy) está finalmente ganhando tração real na comunidade de engenharia, não só nos slides de vendas. A premissa é brutalmente simples: e se o banco de dados da sua aplicação e o motor do seu Data Warehouse lessem exatamente os mesmos arquivos físicos? Formatos abertos como o Apache Iceberg viraram a linguagem franca para isso.</p>
+<p>O fim do ETL? Calma lá. O marketing adora empurrar o termo "Zero-ETL", mas nós sabemos que não existe almoço grátis. Você troca a complexidade de manter pipelines frágeis de replicação de dados (alô, CDC quebrando às 3 da manhã) por gargalos de latência de rede e desafios de governança. Para aplicações ultra-críticas, a latência de ler do S3 durante uma transação ainda é impeditiva. Mas para uns 80% das empresas? Cortar o "imposto do ETL" e ter o time de backend rodando análises diretas na fonte pode ser a maior redução de dor de cabeça operacional desde que fomos para a nuvem.</p>
+<h3>📡 Radar: O Que Você Precisa Saber</h3>
+<p>🧊 <strong>Apache Iceberg como o novo disco rígido universal</strong>
+<em>O que é:</em> O formato de tabela aberta criado pela Netflix cimentou sua vitória. Databricks, Snowflake e BigQuery agora o tratam como cidadão de primeira classe.
+<em>O Impacto:</em> O armazenamento finalmente se desacoplou da computação. Você não está mais refém de um único fornecedor para ler seus dados. Se a licença de um produto explodir o orçamento, você aponta outro motor de consulta (até um DuckDB local) para os mesmos arquivos. O poder de barganha voltou para quem constrói.</p>
+<p>🐘 <strong>Postgres lendo Data Lakes</strong>
+<em>O que é:</em> Extensões e ferramentas (como <code>pg_lakehouse</code> ou integrações no Neon) que permitem ao Postgres consultar Iceberg ou Delta nativamente.
+<em>O Impacto:</em> O engenheiro de software agora consegue fazer um simples <code>JOIN</code> entre a tabela de usuários ativos (quente, no disco local) com 5 anos de histórico de acessos (frio, no S3), sem abrir ticket pedindo para a Engenharia de Dados construir um pipeline. A arquitetura fica radicalmente mais plana e a entrega de valor, mais rápida.</p>
+<p>⚡ <strong>As armadilhas do "Zero-ETL" gerenciado</strong>
+<em>O que é:</em> AWS (Aurora para Redshift) e GCP (AlloyDB para BigQuery) lançando features onde os dados transacionais simplesmente "aparecem" no Warehouse.
+<em>O Impacto:</em> É excelente para decolar projetos rápido, pulando a configuração de Kafka e Debezium. Mas fique de olho na fatura. Você delega o trabalho pesado para a cloud, porém perde o controle granular sobre como e o que é replicado. Para operações com margens apertadas, o conforto cobra seu preço.</p>
+<h3>🛠️ Mão na Massa (Pragmatismo)</h3>
+<p><strong>Arquivos pequenos vão destruir sua arquitetura Zero-Copy.</strong></p>
+<p>Se você vai apontar um motor de consulta direto para o armazenamento em objeto via Iceberg ou Parquet, o design de armazenamento inicial importa dez vezes mais.</p>
+<p>O maior erro em Lakebases iniciantes é o <em>over-partitioning</em>. Se você particionar seus dados por <code>ano/mes/dia/hora</code> para tabelas de baixo volume, vai gerar milhares de arquivos Parquet de 2MB ou menos. O problema? Qualquer motor vai gastar muito mais tempo abrindo conexões de rede e resolvendo metadados do que de fato processando bytes. A latência engole sua performance.</p>
+<p><em>A regra:</em> Mire em arquivos entre 128MB e 512MB. Particione apenas por dimensões que você consulta intensamente (geralmente por data), e deixe os índices colunares nativos fazerem o trabalho deles de pular os blocos inúteis.</p>
+<h3>💬 Debate da Semana</h3>
+<p>Você confia cegamente no hype do "Zero-ETL" para sistemas em produção ou acha que é só uma tática sofisticada dos provedores de cloud para te trancar no ecossistema deles, cobrando um prêmio pela facilidade?</p>
+<p>Deixa sua visão aí nos comentários. A trincheira do dia a dia é onde a gente descobre a verdade.</p>
+    </div>
+    <script>
+        function copyContent(linkElement) {
+            const contentDiv = document.getElementById('content');
+            const range = document.createRange();
+            range.selectNodeContents(contentDiv);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                linkElement.innerHTML = '✔ Copiado! Agora cole (Ctrl+V) no LinkedIn';
+                linkElement.style.background = '#057642'; 
+                setTimeout(function() { selection.removeAllRanges(); }, 100);
+            } catch (err) {
+                alert('Erro ao copiar: ' + err);
+            }
+        }
+    </script>
+</body>
+</html>

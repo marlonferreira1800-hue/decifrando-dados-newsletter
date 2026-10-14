@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>A Moeda Mais Cara do Vale do Silício: Por que a IA Não Fala Português, Pensa em Fatias e Cobra por Sílaba | Decifrando Dados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --brand: #0A66C2;
+      --brand-dark: #004182;
+      --accent: #EA580C;
+      --bg-page: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --text-main: #334155;
+      --text-heading: #0F172A;
+      --border-subtle: #E2E8F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      font-size: 10.5pt;
+      -webkit-font-smoothing: antialiased;
+      padding: 20px 10px;
+    }
+
+    /* Barra Superior Interativa (Apenas na Web) */
+    .toolbar-wrapper {
+      max-width: 820px;
+      margin: 0 auto 24px auto;
+    }
+
+    .copy-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 20px;
+      background: #0A66C2;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 28px;
+      font-size: 11pt;
+      font-weight: 700;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(10, 102, 194, 0.25);
+      transition: all 0.2s ease;
+      margin-bottom: 20px;
+    }
+
+    .copy-button:hover {
+      background: #004182;
+      box-shadow: 0 6px 18px rgba(10, 102, 194, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .seo-box {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-left: 4px solid #0A66C2;
+      padding: 22px 24px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .seo-box h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #0A66C2;
+      font-size: 12pt;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .seo-box p {
+      font-size: 10pt;
+      color: #334155;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .seo-disclaimer {
+      font-size: 8.5pt !important;
+      color: #64748B !important;
+      font-style: italic;
+      margin-top: 10px;
+      margin-bottom: 14px;
+    }
+
+    .feed-post-title {
+      color: #0A66C2;
+      font-size: 11pt;
+      font-weight: 700;
+      margin: 14px 0 8px 0;
+    }
+
+    .feed-post-content {
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      padding: 14px 16px;
+      border-radius: 6px;
+      font-size: 9.5pt;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      color: #1E293B;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      padding: 40px 48px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    /* Cabeçalho */
+    header {
+      border-bottom: 2px solid var(--border-subtle);
+      padding-bottom: 24px;
+      margin-bottom: 30px;
+    }
+
+    .brand-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--brand), #38BDF8);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+    }
+
+    .logo-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--primary);
+    }
+
+    .edition-tag {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 9pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--brand-dark);
+      background: #E0F2FE;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9pt;
+      color: #64748B;
+      font-weight: 500;
+    }
+
+    /* Títulos */
+    h1.article-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 23pt;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text-heading);
+      letter-spacing: -0.8px;
+      margin-bottom: 12px;
+    }
+
+    .article-subtitle {
+      font-size: 12pt;
+      color: #475569;
+      font-weight: 500;
+      line-height: 1.45;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14pt;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.4px;
+      margin-top: 26px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #F1F5F9;
+      padding-bottom: 6px;
+    }
+
+    h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11.5pt;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 14px;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    strong {
+      color: var(--text-heading);
+      font-weight: 600;
+    }
+
+    /* Caixas de Destaque */
+    .callout {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 10pt;
+      page-break-inside: avoid;
+    }
+
+    .callout-pratica {
+      background: #F0F9FF;
+      border-left: 4px solid var(--brand);
+      color: #0369A1;
+    }
+
+    .callout-pratica strong {
+      color: #075985;
+    }
+
+    .callout-destaque {
+      background: #FFF7ED;
+      border-left: 4px solid var(--accent);
+      color: #9A3412;
+    }
+
+    .callout-destaque strong {
+      color: #7C2D12;
+    }
+
+    blockquote {
+      background: #F8FAFC;
+      border-left: 3px solid #CBD5E1;
+      padding: 12px 18px;
+      font-style: italic;
+      color: #475569;
+      margin: 18px 0;
+      border-radius: 0 8px 8px 0;
+      page-break-inside: avoid;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      background: #F1F5F9;
+      color: #0F172A;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    pre code {
+      display: block;
+      padding: 14px;
+      background: #0F172A;
+      color: #E2E8F0;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    /* Rodapé */
+    footer {
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 2px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 8.5pt;
+      color: #64748B;
+      page-break-inside: avoid;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Regras de Impressão para PDF */
+    @media print {
+      body {
+        background: #FFFFFF;
+        padding: 0;
+      }
+
+      .no-print, .copy-button, .seo-box, .toolbar-wrapper {
+        display: none !important;
+      }
+
+      .container {
+        padding: 0;
+        max-width: 100%;
+        border: none;
+        box-shadow: none;
+      }
+
+      @page {
+        size: A4;
+        margin: 18mm 15mm 20mm 15mm;
+      }
+
+      h2, h3, .callout, blockquote, footer {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra Superior Interativa (Oculta no PDF) -->
+  <div class="toolbar-wrapper no-print">
+    <a href="https://www.linkedin.com/post/new" target="_blank" class="copy-button" onclick="copyRichText(event)">
+      <span>📋 Copiar Texto Formatado e Abrir LinkedIn</span>
+    </a>
+
+    <div class="seo-box">
+      <h3>⚙️ Metadados de SEO para o LinkedIn</h3>
+      <p><strong>Título SEO:</strong> Tokens de IA Explicados: A Moeda e o Custo dos LLMs | Decifrando Dados</p>
+      <p><strong>Descrição SEO:</strong> Entenda como funcionam os tokens de IA, a moeda que move LLMs e data centers. Descubra como otimizar custos de inferência e acelerar modelos na prática.</p>
+      <p class="seo-disclaimer">* Copie estes dados manualmente para a área de SEO do LinkedIn. O botão azul copiará apenas o texto do artigo.</p>
+      <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 16px 0;">
+      <div class="feed-post-title">📢 Post de Divulgação ("Conte para sua rede..."):</div>
+      <div class="feed-post-content">Você sabe exatamente pelo que sua empresa está pagando quando recebe a fatura mensal da OpenAI ou da AWS?<br><br>Spoiler: você não está comprando inteligência abstrata. Você está comprando fatias numéricas de palavras chamadas tokens.<br><br>Nesta edição da Decifrando Dados, investigamos a anatomia e a economia dos tokens de inteligência artificial a partir de análises técnicas da NVIDIA: como modelos decompõem texto e pixels em representações vetoriais, por que o pensamento deliberado consome até 100 vezes mais computação por resposta e como equipes de engenharia reduziram o custo por token em 20x.<br><br>Também analisamos por que línguas como o português sofrem com fatiamentos ineficientes e três decisões práticas de arquitetura para blindar sua fatura de inferência na nuvem.<br><br>Leia a edição completa abaixo e me conte nos comentários: na sua empresa, o time já audita a eficiência de tokens nos dashboards de engenharia ou o custo ainda é uma surpresa mensal?<br><br>#dados #analytics #carreira #ia #sql #DecifrandoDados</div>
+    </div>
+  </div>
+
+  <!-- Conteúdo Formatado da Newsletter -->
+  <div class="container" id="newsletter-content">
+    <header>
+      <div class="brand-bar">
+        <div class="logo-badge">
+          <div class="logo-icon">D</div>
+          <span class="logo-text">Decifrando Dados</span>
+        </div>
+        <span class="edition-tag">Edição 27</span>
+      </div>
+      <div class="meta-bar">
+        <span>Por <strong>Marlon Ferreira</strong></span>
+        <span>11/10/2026 &bull; Leitura: 4 min</span>
+      </div>
+    </header>
+
+    <h1 class="article-title">A Moeda Mais Cara do Vale do Silício: Por que a IA Não Fala Português, Pensa em Fatias e Cobra por Sílaba</h1>
+    <div class="article-subtitle">Da anatomia dos tokenizadores ao salto de 100x no custo de raciocínio: como frações de palavras viraram o ativo financeiro mais disputado da tecnologia</div>
+
+    <main class="content">
+      <h2>Efeméride: Há quase 10 anos na tecnologia...</h2>
+<p>Em 2017, uma equipe de pesquisadores publicou o artigo <em>&quot;Attention Is All You Need&quot;</em>, introduzindo a arquitetura Transformer que transformou a inteligência artificial moderna. Mas antes de qualquer mecanismo de autoatenção calcular uma única matriz de pesos, o texto bruto precisava passar por um porteiro discreto: o tokenizador de subpalavras. O que começou como uma adaptação prática de algoritmos de compressão de dados dos anos 90, como o Byte-Pair Encoding criado por Philip Gage em 1994, rapidamente se transformou na fundação de toda a economia computacional contemporânea. Décadas atrás, engenheiros contavam bytes em fitas magnéticas para otimizar espaço em disco; hoje, diretores de tecnologia contam frações de centavos por milhar de tokens flutuando em clusters acelerados de data centers.</p>
+<hr style='border:none;border-top:1px solid #E2E8F0;margin:24px 0;'>
+<h2>⚡ O que você vai ver hoje</h2>
+<ul>
+<li>🧩 <strong>A anatomia do fatiamento:</strong> Por que a palavra &quot;darkness&quot; vira dois números e como modelos aprendem relações semânticas em milissegundos.</li>
+<li>💸 <strong>A moeda das fábricas de IA:</strong> Como a otimização de software e hardware derrubou o custo operacional por token em 20x e alavancou a receita em 25 vezes.</li>
+<li>🧠 <strong>O salto do pensamento longo:</strong> Por que os novos modelos de raciocínio consomem até 100x mais processamento por resposta em busca de precisão lógica.</li>
+<li>☕ <strong>Don&#x27;t Leave, Just Read:</strong> Giro expresso com a expansão de vocabulários no Llama 3, data centers de 100 MW, a disputa entre TTFT e ITL e a ilusão das janelas de 1 milhão de tokens.</li>
+<li>🛠️ <strong>Decifrando na Prática:</strong> 3 passos técnicos de arquitetura para auditar vocabulários, otimizar cache de inferência e rotear modelos com eficiência.</li>
+</ul>
+<hr style='border:none;border-top:1px solid #E2E8F0;margin:24px 0;'>
+<h2>ECONOMIA DE IA &amp; INFRAESTRUTURA</h2>
+<h3>A Moeda Secreta dos Modelos de Linguagem: Como o Fatiamento de Dados Governa o Custo e a Performance da IA</h3>
+<p>Toda pessoa que já interagiu com um assistente virtual tem a nítida impressão de estar dialogando com uma entidade que compreende a sintaxe do português ou as sutilezas da prosa contemporânea. Trata-se de uma ilusão de ótica elegante. Redes neurais profundas não leem palavras, não entendem pontuação e não interpretam sentenças como seres humanos. Elas operam puramente sobre matrizes matemáticas povoadas por números inteiros: os tokens.</p>
+<p>O fatiamento dos dados começa logo na entrada da esteira. Se um modelo processa texto, áudio ou imagens de sensores, o tokenizador divide essa torrente de informações em unidades atômicas discretas. Como explica Dave Salvator, diretor de produtos de computação acelerada da NVIDIA, uma palavra como <em>darkness</em> é fragmentada em duas partículas, &quot;dark&quot; e &quot;ness&quot;, recebendo identificadores numéricos específicos, como 217 e 655. Seu antônimo, <em>brightness</em>, recebe os códigos 491 e 655. O número idêntico associado ao sufixo &quot;ness&quot; fornece à rede a pista matemática de que ambos os termos compartilham uma propriedade estrutural comum. Palavras polissêmicas recebem identificações contextuais distintas para diferenciar significados opostos, como repousar ou faltar com a verdade. Para dados visuais, pixels e voxels viram sequências de tokens discretos; para áudio, espectrogramas e ondas sonoras são convertidos em representações semânticas compactas.</p>
+<p>À medida que os modelos migram dos laboratórios de pesquisa para a produção em larga escala, os tokens deixam de ser uma abstração matemática e passam a ditar a receita e o prejuízo das operações. Em data centers modernos, chamados pela indústria de &quot;fábricas de IA&quot;, o objetivo principal é converter eletricidade e silício em tokens de inteligência útil ao menor custo unitário possível. É aqui que a engenharia de software e a infraestrutura especializada se encontram.</p>
+<div class='callout callout-destaque'>💡 <strong>O número do jogo:</strong> Dados técnicos compartilhados pela NVIDIA revelam que a integração de otimizações de software dedicadas e a adoção de GPUs de última geração reduziram o custo por token em 20 vezes em comparação com implementações tradicionais da geração anterior, gerando 25 vezes mais receita em apenas quatro semanas. Além disso, a nova fronteira dos modelos de raciocínio deliberado (test-time compute) gera cadeias internas de pensamento que podem demandar mais de 100 vezes o poder computacional exigido por uma inferência tradicional por prompt.</div>
+<p>Esse salto na demanda computacional representa uma mudança profunda na economia digital. Até pouco tempo, a inferência era vista como uma passagem rápida: o usuário enviava dez palavras e o modelo respondia com cinquenta. Com a ascensão do raciocínio em tempo de teste, o modelo gera centenas ou milhares de &quot;tokens de pensamento&quot; intermediários para verificar consistência lógica, simular cenários e corrigir erros antes de exibir a conclusão final. Mais tokens gerados significam respostas substancialmente melhores para problemas complexos de matemática, código ou negócios, mas também transformam qualquer chamada de API negligenciada em um multiplicador direto de custos operacionais.</p>
+<div class='callout callout-pratica'>🎯 <strong>Recado para a diretoria:</strong> Tratar tokens como um mero detalhe técnico na fatura da nuvem é receita garantida para queimar capital e sufocar a margem dos seus produtos de software. Empresas de alta maturidade não compram chamadas de inteligência artificial por estimativa genérica; elas gerenciam métricas de custo por milhão de tokens, latência de resposta inicial e índice de compressão linguística. Se a sua liderança técnica ainda não sabe quantos tokens cada funcionalidade do seu aplicativo consome, a sua organização não está construindo uma vantagem competitiva; está apenas financiando o faturamento do seu provedor de infraestrutura.</div>
+<hr style='border:none;border-top:1px solid #E2E8F0;margin:24px 0;'>
+<h2>☕ Don&#x27;t Leave, Just Read</h2>
+<ul>
+<li>🟢 <strong>A guerra dos vocabulários e o alívio para o português:</strong> Modelos antigos operavam com vocabulários limitados a 32 mil tokens, o que fragmentava palavras em línguas não-inglesas em dezenas de pedaços pequenos e encarecia a inferência no Brasil em até 50%. A nova geração de modelos, como a família Llama 3 com 128 mil tokens, reduziu essa taxa de fragmentação em até 35%, barateando o processamento de texto em português e blocos de código.</li>
+<li>🟡 <strong>Data centers transformados em usinas de tokens:</strong> A expansão da inteligência artificial generativa forçou a reformulação arquitetural dos centros de processamento de dados. Instalações que consomem mais de 100 megawatts agora têm seu retorno sobre investimento calculado não mais em servidores ativos por rack, mas na quantidade consolidada de tokens monetizáveis gerados por quilowatt-hora.</li>
+<li>🔵 <strong>O equilíbrio sensível entre TTFT e ITL:</strong> A experiência do usuário em aplicações de IA depende de duas métricas fundamentais de latência: o Time to First Token (TTFT), que mede a rapidez do primeiro sinal na tela, e a Inter-Token Latency (ITL), que dita o ritmo fluido de leitura. Aplicações conversacionais exigem TTFT abaixo de meio segundo, enquanto sistemas de análise pesada aceitam esperas maiores em troca de maior profundidade analítica.</li>
+<li>🔴 <strong>O perigo das janelas infladas de 1 milhão de tokens:</strong> A publicidade dos grandes provedores adora promover janelas de contexto gigantescas, capazes de absorver livros inteiros em uma única requisição. Na prática, alimentar modelos com centenas de páginas sem filtragem prévia dispara os custos de memória com KV Cache e degrada a capacidade de atenção da rede, resultando em respostas vagas e faturas estratosféricas.</li>
+</ul>
+<hr style='border:none;border-top:1px solid #E2E8F0;margin:24px 0;'>
+<h2>🛠️ Decifrando na Prática</h2>
+<p>Otimizar o consumo de tokens e a performance de inferência requer controle rigoroso sobre os pipelines de dados e a camada de computação:</p>
+<ul>
+<li><strong>1. Auditoria e compressão da esteira de tokenização:</strong> Meça a proporção entre caracteres e tokens nos seus conjuntos de dados usando bibliotecas como <code>tiktoken</code> em Python. Remova espaços em branco duplicados, formate payloads em esquemas enxutos e elimine trechos repetitivos de metadados antes de despachar os prompts para a API, reduzindo em até 25% o consumo de tokens de entrada sem perder fidelidade semântica.</li>
+<li><strong>2. Desacoplamento técnico entre prefill e decode com paginação de cache:</strong> Isole a etapa de leitura do prompt (prefill) da fase de geração iterativa dos tokens de saída (decode). Ao hospedar modelos próprios com frameworks modernos como vLLM ou TensorRT-LLM, ative o gerenciamento de paginação de memória (PagedAttention) e o reaproveitamento de prefixos comuns para evitar o recálculo redundante de instruções de sistema em chamadas subsequentes.</li>
+<li><strong>3. Roteamento inteligente de modelos e orçamento de raciocínio:</strong> Não utilize modelos massivos com test-time compute avançado para resolver tarefas cotidianas de extração, classificação ou padronização de dados. Configure gateways de roteamento dinâmico que direcionem requisições simples para modelos menores e especializados (SLMs), reservando os modelos de raciocínio profundo exclusivamente para cenários complexos de tomada de decisão onde a densidade lógica justifique o custo operacional superior.</li>
+</ul>
+<hr style='border:none;border-top:1px solid #E2E8F0;margin:24px 0;'>
+<h2>💡 A Redação Recomenda &amp; Frase do Dia</h2>
+<ul>
+<li><strong>A Redação Recomenda:</strong> Conheça e teste os microsserviços <strong>NVIDIA NIM</strong> e o compilador <strong>TensorRT-LLM</strong> (acessíveis em <code>build.nvidia.com</code>). Eles entregam contêineres pré-configurados com quantização em FP8, paralelismo avançado e agendamento contínuo de lotes, viabilizando ganhos expressivos de vazão de tokens e redução substancial de latência em ambientes produtivos.</li>
+<li><strong>Frase do Dia:</strong> <em>&quot;Gostaria que não precisássemos de tokenizadores. Eles concentram armadilhas sutis e comportamentos inesperados em quase todos os modelos de linguagem, mas hoje formam a ponte exata pela qual as redes neurais interpretam a informação.&quot;</em> — Andrej Karpathy, pesquisador de inteligência artificial e cofundador da OpenAI.</li>
+</ul>
+    </main>
+
+    <footer>
+      <div class="author-info">
+        <div class="author-avatar">MF</div>
+        <div>
+          <div><strong>Decifrando Dados</strong> &bull; por Marlon Ferreira</div>
+          <div>Ciência de Dados, Machine Learning e Inteligência Artificial na Prática</div>
+        </div>
+      </div>
+      <div>
+        <span>linkedin.com/newsletters/decifrando-dados-7513791689808064512/</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function copyRichText(e) {
+      const content = document.getElementById('newsletter-content');
+      if (!content) return;
+
+      const range = document.createRange();
+      range.selectNodeContents(content);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      try {
+        document.execCommand('copy');
+        const btn = document.querySelector('.copy-button span');
+        if (btn) {
+          const originalText = btn.innerText;
+          btn.innerText = '✅ Artigo Copiado com Sucesso! Abrindo LinkedIn...';
+          setTimeout(() => { btn.innerText = originalText; }, 3500);
+        }
+      } catch (err) {
+        console.error('Falha ao copiar:', err);
+      }
+      selection.removeAllRanges();
+    }
+  </script>
+</body>
+</html>

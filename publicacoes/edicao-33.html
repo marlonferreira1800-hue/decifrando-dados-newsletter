@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>A ressaca dos agentes de IA: você comprou um estagiário de US$ 50 mil que não sabe ler PDF | Decifrando Dados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --brand: #0A66C2;
+      --brand-dark: #004182;
+      --accent: #EA580C;
+      --bg-page: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --text-main: #334155;
+      --text-heading: #0F172A;
+      --border-subtle: #E2E8F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      font-size: 10.5pt;
+      -webkit-font-smoothing: antialiased;
+      padding: 20px 10px;
+    }
+
+    /* Barra Superior Interativa (Apenas na Web) */
+    .toolbar-wrapper {
+      max-width: 820px;
+      margin: 0 auto 24px auto;
+    }
+
+    .copy-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 20px;
+      background: #0A66C2;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 28px;
+      font-size: 11pt;
+      font-weight: 700;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(10, 102, 194, 0.25);
+      transition: all 0.2s ease;
+      margin-bottom: 20px;
+    }
+
+    .copy-button:hover {
+      background: #004182;
+      box-shadow: 0 6px 18px rgba(10, 102, 194, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .seo-box {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-left: 4px solid #0A66C2;
+      padding: 22px 24px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .seo-box h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #0A66C2;
+      font-size: 12pt;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .seo-box p {
+      font-size: 10pt;
+      color: #334155;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .seo-disclaimer {
+      font-size: 8.5pt !important;
+      color: #64748B !important;
+      font-style: italic;
+      margin-top: 10px;
+      margin-bottom: 14px;
+    }
+
+    .feed-post-title {
+      color: #0A66C2;
+      font-size: 11pt;
+      font-weight: 700;
+      margin: 14px 0 8px 0;
+    }
+
+    .feed-post-content {
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      padding: 14px 16px;
+      border-radius: 6px;
+      font-size: 9.5pt;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      color: #1E293B;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      padding: 40px 48px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    /* Cabeçalho */
+    header {
+      border-bottom: 2px solid var(--border-subtle);
+      padding-bottom: 24px;
+      margin-bottom: 30px;
+    }
+
+    .brand-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--brand), #38BDF8);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+    }
+
+    .logo-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--primary);
+    }
+
+    .edition-tag {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 9pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--brand-dark);
+      background: #E0F2FE;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9pt;
+      color: #64748B;
+      font-weight: 500;
+    }
+
+    /* Títulos */
+    h1.article-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 23pt;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text-heading);
+      letter-spacing: -0.8px;
+      margin-bottom: 12px;
+    }
+
+    .article-subtitle {
+      font-size: 12pt;
+      color: #475569;
+      font-weight: 500;
+      line-height: 1.45;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14pt;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.4px;
+      margin-top: 26px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #F1F5F9;
+      padding-bottom: 6px;
+    }
+
+    h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11.5pt;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 14px;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    strong {
+      color: var(--text-heading);
+      font-weight: 600;
+    }
+
+    /* Caixas de Destaque */
+    .callout {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 10pt;
+      page-break-inside: avoid;
+    }
+
+    .callout-pratica {
+      background: #F0F9FF;
+      border-left: 4px solid var(--brand);
+      color: #0369A1;
+    }
+
+    .callout-pratica strong {
+      color: #075985;
+    }
+
+    .callout-destaque {
+      background: #FFF7ED;
+      border-left: 4px solid var(--accent);
+      color: #9A3412;
+    }
+
+    .callout-destaque strong {
+      color: #7C2D12;
+    }
+
+    blockquote {
+      background: #F8FAFC;
+      border-left: 3px solid #CBD5E1;
+      padding: 12px 18px;
+      font-style: italic;
+      color: #475569;
+      margin: 18px 0;
+      border-radius: 0 8px 8px 0;
+      page-break-inside: avoid;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      background: #F1F5F9;
+      color: #0F172A;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    pre code {
+      display: block;
+      padding: 14px;
+      background: #0F172A;
+      color: #E2E8F0;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    /* Rodapé */
+    footer {
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 2px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 8.5pt;
+      color: #64748B;
+      page-break-inside: avoid;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Regras de Impressão para PDF */
+    @media print {
+      body {
+        background: #FFFFFF;
+        padding: 0;
+      }
+
+      .no-print, .copy-button, .seo-box, .toolbar-wrapper {
+        display: none !important;
+      }
+
+      .container {
+        padding: 0;
+        max-width: 100%;
+        border: none;
+        box-shadow: none;
+      }
+
+      @page {
+        size: A4;
+        margin: 18mm 15mm 20mm 15mm;
+      }
+
+      h2, h3, .callout, blockquote, footer {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra Superior Interativa (Oculta no PDF) -->
+  <div class="toolbar-wrapper no-print">
+    <a href="https://www.linkedin.com/post/new" target="_blank" class="copy-button" onclick="copyRichText(event)">
+      <span>📋 Copiar Texto Formatado e Abrir LinkedIn</span>
+    </a>
+
+    <div class="seo-box">
+      <h3>⚙️ Metadados de SEO para o LinkedIn</h3>
+      <p><strong>Título SEO:</strong> Ressaca dos Agentes de IA: Custos de Tokens e ROI | Decifrando Dados #33</p>
+      <p><strong>Descrição SEO:</strong> Por que 59% dos projetos de agentes de IA falham no ROI corporativo, como o custo de tokens explode e o que fazer para sua empresa não queimar dinheiro.</p>
+      <p class="seo-disclaimer">* Copie estes dados manualmente para a área de SEO do LinkedIn. O botão azul copiará apenas o texto do artigo.</p>
+      <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 16px 0;">
+      <div class="feed-post-title">📢 Post de Divulgação ("Conte para sua rede..."):</div>
+      <div class="feed-post-content">A sua empresa também contratou um &quot;exército de agentes autônomos&quot; achando que ia demitir meio andar e agora está olhando para uma fatura de tokens de cinco dígitos sem entender o retorno?<br><br>O dado do mercado é implacável: 59% dos projetos corporativos de agentes de IA não batem as metas de ROI no primeiro ano. O problema nunca foi a capacidade do LLM em si, mas a ilusão de plugar agentes autônomos em bases de dados caóticas e processos legados cheios de gambiarras.<br><br>Na edição #33 da Decifrando Dados, disseco a anatomia desse tropeço corporativo: o custo oculto da orquestração, as armadilhas de benchmarks sintéticos e três passos práticos para colocar travas financeiras na sua stack.<br><br>Você já viu algum agente de IA rodando em produção que realmente pagou a própria conta ou ainda estamos no festival do piloto infinito? Deixe sua experiência nos comentários.<br><br>#dados #analytics #carreira #ia #sql</div>
+    </div>
+  </div>
+
+  <!-- Conteúdo Formatado da Newsletter -->
+  <div class="container" id="newsletter-content">
+    <header>
+      <div class="brand-bar">
+        <div class="logo-badge">
+          <div class="logo-icon">D</div>
+          <span class="logo-text">Decifrando Dados</span>
+        </div>
+        <span class="edition-tag">Edição 33</span>
+      </div>
+      <div class="meta-bar">
+        <span>Por <strong>Marlon Ferreira</strong></span>
+        <span>12/10/2026 &bull; Leitura: 4 min</span>
+      </div>
+    </header>
+
+    <h1 class="article-title">A ressaca dos agentes de IA: você comprou um estagiário de US$ 50 mil que não sabe ler PDF</h1>
+    <div class="article-subtitle">59% dos projetos corporativos de agentes falham no ROI no primeiro ano enquanto empresas descobrem que automatizar processo quebrado só escala o caos.</div>
+
+    <main class="content">
+      <p>Há 15 anos na tecnologia, em outubro de 2011, a IBM colocava o supercomputador Watson para bater campeões humanos no programa de TV Jeopardy. A promessa corporativa na época era que a IA diagnostundaria doenças complexas e aposentaria consultores em três anos. Uma década depois, a divisão foi fatiada e vendida a preço de liquidação. Corta para o momento presente: a promessa da vez é a &quot;força de trabalho agêntica&quot;. Só esqueceram de avisar que soltar um agente autônomo sobre dados desorganizados gera apenas loops infinitos e boletos estratosféricos.</p>
+<p>⚡ <strong>O que você vai ver hoje:</strong></p>
+<ul>
+<li>🤖 O cemitério dos pilotos corporativos: por que o agente brilha na demo e morre na produção</li>
+<li>💸 A armadilha do loop de tokens: como uma consulta comum vira uma fatura de cinco dígitos</li>
+<li>🧹 O dado sujo venceu o modelo: o gargalo real que nenhuma GPU resolve por milagre</li>
+</ul>
+<h2>NEGÓCIOS &amp; INFRAESTRUTURA DE IA: Quando a fatura chega antes do ganho de produtividade</h2>
+<p>O roteiro das reuniões de diretoria nos últimos doze meses seguiu quase sempre o mesmo padrão: apresentações cheias de slides prevendo automação total de processos fiscais, atendimento e análise financeira com agentes autônomos integrados a ferramentas internas. A teoria era elegante: o modelo raciocina, executa chamadas de API, toma decisões e entrega o resultado pronto.</p>
+<p>Na vida real, a conta chegou. Embora o preço unitário do milhão de tokens de entrada tenha despencado nos modelos de ponta, a arquitetura agêntica introduziu um multiplicador perverso: a orquestração multi-etapas. Um agente encarregado de reconciliar notas fiscais entra em loop de raciocínio, dispara 40 chamadas consecutivas de ferramentas, recupera 80 mil tokens de contexto irrelevante e, no final, falha porque encontrou um campo nulo numa planilha compartilhada em 2019.</p>
+<p>O custo oculto da IA corporativa não está na compra do modelo, mas na pilha inteira de sustentação: observabilidade, camada de contexto vetorial, guardrails de segurança e horas de engenharia sênior limpando a bagunça deixada por execuções incorretas.</p>
+<div class='callout callout-destaque'>💡 <strong>O número do jogo:</strong> 59% dos programas corporativos de agentes de IA não atingem as metas de retorno sobre investimento (ROI) no primeiro ano de operação (Gartner / Enterprise AI Index). Em 4 de cada 10 companhias, o custo acumulado de inferência e correções manuais superou a economia de mão de obra projetada.</div>
+<div class='callout callout-pratica'>🎯 <strong>Recado para a diretoria:</strong> Se a sua governança de dados mal consegue garantir que o relatório financeiro do mês passado feche sem ajuste manual no Excel, plugar um agente autônomo com permissão de escrita só vai automatizar o erro em nanossegundos. Menos entusiasmo de palco e mais disciplina de engenharia de dados.</div>
+<p><strong>Fonte:</strong> [Gartner Enterprise AI Research — The Real Cost of Autonomous Agents in Production](https://www.gartner.com/en/newsroom)</p>
+<h2>Don&#x27;t Leave, Just Read</h2>
+<ul>
+<li>📉 <strong>Benchmarks sintéticos sob desconfiança:</strong> Testes tradicionais de laboratório como MMLU e GSM8K estão saturados e com questões contaminadas. Empresas que selecionaram modelos apenas por gráficos de benchmark público enfrentam quedas bruscas de acurácia quando o sistema lida com dados ruidosos do mundo corporativo real.</li>
+<li>🏷️ <strong>Gastos globais chegam a US$ 2,5 trilhões:</strong> Relatórios recentes de consultorias internacionais confirmam o apetite insaciável por infraestrutura de inteligência artificial, mas apontam mudança de foco: o capital corporativo começou a migrar de experimentação aberta para plataformas de observabilidade, catálogo de dados e controle de custos.</li>
+<li>🕵️ <strong>O calcanhar de Aquiles do RAG:</strong> Levantamentos recentes de engenharia mostram que mais de 65% das falhas em pipelines corporativos de busca e geração não acontecem por deficiência cognitiva do LLM, mas sim por falta de sincronização entre bancos transacionais, permissões incorretas de pastas e metadados inexistentes.</li>
+<li>🛠️ <strong>Desenvolvimento assistido vira centro de custo fixo:</strong> Licenças de assistentes de código e cotas adicionais de tokens já disputam orçamento com serviços tradicionais de nuvem e ferramentas de integração contínua. A cobrança sobre os times de engenharia agora é comprovar ganho de qualidade de entrega, e não apenas volume de código gerado.</li>
+</ul>
+<h2>Decifrando na Prática: 3 passos para esta semana</h2>
+<p>1. <strong>Implante circuit breakers financeiros e operacionais:</strong> Estabeleça limites rígidos de iterações e orçamento por sessão para qualquer agente com acesso a ferramentas externas. Se o fluxo atingir mais de 6 iterações ou consumir mais de 40 mil tokens sem convergência, interrompa a execução e acione transição para operador humano.</p>
+<p>2. <strong>Substitua contexto livre por contratos de dados estritos:</strong> Não permita que agentes façam buscas cegas em diretórios genéricos de arquivos. Exponha apenas APIs tipadas, funções com schemas JSON validados e views SQL controladas com filtros pré-definidos.</p>
+<p>3. <strong>Monitore o Custo por Tarefa Concluída com Sucesso:</strong> Elimine métricas de vaidade baseadas em volume bruto de tokens transacionados. Divida a despesa real de infraestrutura, chamadas de modelo e retries pelo número de processos finalizados sem necessidade de retrabalho manual.</p>
+<h2>A Redação Recomenda &amp; Frase do Dia</h2>
+<ul>
+<li><strong>Ferramenta da semana:</strong> [<code>Langfuse</code>](https://github.com/langfuse/langfuse) — plataforma de engenharia e observabilidade open source para rastrear chamadas de LLMs, monitorar latência, auditar custos por usuário e identificar loops desgovernados antes do fechamento da fatura.</li>
+<li><em>&quot;Conectar um agente autônomo a um banco de dados legado sem documentação nem validação de esquema é o equivalente digital a entregar um maçarico para quem pediu uma caneta: a tarefa até pode ser resolvida, mas o escritório não sobrevive para contar a história.&quot;</em></li>
+</ul>
+    </main>
+
+    <footer>
+      <div class="author-info">
+        <div class="author-avatar">MF</div>
+        <div>
+          <div><strong>Decifrando Dados</strong> &bull; por Marlon Ferreira</div>
+          <div>Ciência de Dados, Machine Learning e Inteligência Artificial na Prática</div>
+        </div>
+      </div>
+      <div>
+        <span>linkedin.com/newsletters/decifrando-dados-7513791689808064512/</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function copyRichText(e) {
+      const content = document.getElementById('newsletter-content');
+      if (!content) return;
+
+      const range = document.createRange();
+      range.selectNodeContents(content);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      try {
+        document.execCommand('copy');
+        const btn = document.querySelector('.copy-button span');
+        if (btn) {
+          const originalText = btn.innerText;
+          btn.innerText = '✅ Artigo Copiado com Sucesso! Abrindo LinkedIn...';
+          setTimeout(() => { btn.innerText = originalText; }, 3500);
+        }
+      } catch (err) {
+        console.error('Falha ao copiar:', err);
+      }
+      selection.removeAllRanges();
+    }
+  </script>
+</body>
+</html>

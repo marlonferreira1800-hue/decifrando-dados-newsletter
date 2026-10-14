@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Preview da Newsletter</title>
+    <style>
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, sans-serif;
+            line-height: 1.5;
+            color: rgba(0,0,0,0.9);
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f3f2ef;
+        }
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+        }
+        .toolbar {
+            position: sticky;
+            top: 20px;
+            margin-bottom: 20px;
+            text-align: right;
+            z-index: 100;
+        }
+        .btn {
+            background: #0a66c2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #004182;
+        }
+        
+        #content h1 { font-size: 24px; font-weight: 600; margin: 24px 0 16px; }
+        #content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 16px; }
+        #content h3 { font-size: 18px; font-weight: 600; margin: 24px 0 16px; }
+        #content p { margin-bottom: 16px; font-size: 16px; }
+        #content ul { margin-bottom: 16px; padding-left: 24px; }
+        #content li { margin-bottom: 8px; font-size: 16px; }
+        #content img { max-width: 100%; height: auto; border-radius: 8px; margin: 16px 0; display: block; }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <a href="https://www.linkedin.com/article/new/" target="_blank" class="btn" onclick="copyContent(this)">1. Copiar Formatação e 2. Abrir LinkedIn</a>
+    </div>
+    <div class="container" id="content">
+        <h1>Decifrando Dados: Engenharia de Dados Agêntica – Quando a IA começa a escrever pipelines</h1>
+<h2>🧠 O Insight da Semana</h2>
+<p>Passamos a última década brigando com DAGs no Airflow, escrevendo queries repetitivas de extração e rezando para o modelo do dbt não quebrar silenciosamente na madrugada. Agora, a promessa da vez é a Engenharia de Dados Agêntica: colocar agentes de IA para orquestrar, escrever e dar manutenção em pipelines inteiros. Soa incrível no deck de vendas de alguma startup do Vale do Silício. Na trincheira, a realidade é bem diferente.</p>
+<p>Pipelines de dados não toleram criatividade. Não toleram alucinação. Se um agente decide "otimizar" um JOIN e acidentalmente duplica a receita no dashboard da diretoria, a desculpa do "modelo probabilístico" não vai salvar seu emprego. Por isso, a versão da Engenharia Agêntica que <em>realmente</em> funciona hoje passa longe do agente mágico onipotente. </p>
+<p>O que estamos vendo ganhar tração são <strong>agentes hiperespecializados e com escopo ultrarreduzido</strong>. É o agente que lê um log de erro do dbt e já abre um Pull Request corrigindo o nome da coluna que mudou no upstream. É a IA gerando testes de qualidade estatísticos baseados no comportamento histórico dos dados, poupando você de escrever dezenas de <code>asserts</code> manuais. Esqueça a revolução das máquinas; pense nesses agentes como estagiários incansáveis, extremamente rápidos, mas que ainda precisam de um engenheiro sênior para revisar cada linha de código que vai para produção.</p>
+<h2>📡 Radar: O Que Você Precisa Saber</h2>
+<ul>
+<li><strong>🩹 Auto-healing na Orquestração (O fim do on-call inútil?)</strong></li>
+<li><em>O que é:</em> Plataformas de dados começando a integrar agentes que analisam stack traces de falhas, identificam a causa raiz (ex: erro de tipagem) e sugerem a correção no código ou reexecutam o job com parâmetros ajustados em ambiente isolado.</li>
+<li>
+<p><em>O Impacto:</em> Isso afeta diretamente a saúde mental do time de dados. Ter um agente filtrando e resolvendo os erros mecânicos de madrugada significa que você só será acordado quando a lógica de negócios quebrar de verdade.</p>
+</li>
+<li>
+<p><strong>🧹 LLMs nativos substituindo o Regex Infernal</strong></p>
+</li>
+<li><em>O que é:</em> Bancos como BigQuery e Snowflake embutindo chamadas de IA diretamente no SQL para padronizar e categorizar texto sujo e não-estruturado.</li>
+<li>
+<p><em>O Impacto:</em> Sabe aquele pipeline de ETL bizarro com 50 linhas de RegEx para limpar descrições de produtos? Você agora faz isso com uma função nativa chamando um LLM dentro da própria query. A arquitetura fica brutalmente mais simples.</p>
+</li>
+<li>
+<p><strong>🤖 Data Quality Generativo</strong></p>
+</li>
+<li><em>O que é:</em> O uso de agentes para inferir regras de qualidade e anomalias olhando para o histórico da tabela, propondo automaticamente o que deve ser monitorado.</li>
+<li><em>O Impacto:</em> Tira o peso do engenheiro de adivinhar todos os edge cases. O agente propõe, você revisa e aprova. É a transição de criar testes manualmente para ser um curador de testes.</li>
+</ul>
+<h2>🛠️ Mão na Massa (Pragmatismo)</h2>
+<p>Quer testar IA no seu fluxo de dados hoje sem colocar sua infraestrutura em risco? Use IA para liquidar a pior parte do trabalho: <strong>documentação de modelos legados no dbt</strong>.</p>
+<p>Não tente fazer o agente reescrever a lógica complexa ainda. Pegue aquela query monolítica de 800 linhas que o analista sênior fez há dois anos e foi embora. Jogue em um LLM (pode ser GPT-4, Gemini ou um modelo local) com um prompt ultradireto:</p>
+<p><code>"Você é um parser de código. Analise este modelo dbt. Extraia exatamente: 1) As tabelas de origem, 2) Os filtros WHERE aplicados, 3) A chave primária inferida, e 4) O que este modelo faz em 1 frase curta. Retorne APENAS um bloco YAML formatado e pronto para colar no schema.yml do dbt."</code></p>
+<p>Você transforma horas de engenharia reversa em metadados estruturados em segundos. O agente trabalha, você ganha tempo para arquitetar.</p>
+<h2>💬 Debate da Semana</h2>
+<p>Sendo brutalmente honesto: Você deixaria um agente de IA aprovar e dar merge sozinho em um PR de correção de esquema em produção se os testes automatizados passassem? Ou o "olho humano" final é algo inegociável na sua stack?</p>
+    </div>
+    <script>
+        function copyContent(linkElement) {
+            const contentDiv = document.getElementById('content');
+            const range = document.createRange();
+            range.selectNodeContents(contentDiv);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                linkElement.innerHTML = '✔ Copiado! Agora cole (Ctrl+V) no LinkedIn';
+                linkElement.style.background = '#057642'; 
+                setTimeout(function() { selection.removeAllRanges(); }, 100);
+            } catch (err) {
+                alert('Erro ao copiar: ' + err);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Preview da Newsletter</title>
+    <style>
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, sans-serif;
+            line-height: 1.5;
+            color: rgba(0,0,0,0.9);
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f3f2ef;
+        }
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+        }
+        .toolbar {
+            position: sticky;
+            top: 20px;
+            margin-bottom: 20px;
+            text-align: right;
+            z-index: 100;
+        }
+        .btn {
+            background: #0a66c2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #004182;
+        }
+        
+        #content h1 { font-size: 24px; font-weight: 600; margin: 24px 0 16px; }
+        #content h2 { font-size: 20px; font-weight: 600; margin: 24px 0 16px; }
+        #content h3 { font-size: 18px; font-weight: 600; margin: 24px 0 16px; }
+        #content p { margin-bottom: 16px; font-size: 16px; }
+        #content ul { margin-bottom: 16px; padding-left: 24px; }
+        #content li { margin-bottom: 8px; font-size: 16px; }
+        #content img { max-width: 100%; height: auto; border-radius: 8px; margin: 16px 0; display: block; }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <a href="https://www.linkedin.com/article/new/" target="_blank" class="btn" onclick="copyContent(this)">1. Copiar Formatação e 2. Abrir LinkedIn</a>
+    </div>
+    <div class="container" id="content">
+        <h1>Decifrando Dados: O PagerDuty não deveria ser seu despertador (Data Contracts na Prática)</h1>
+<p><strong>🧠 O Insight da Semana</strong></p>
+<p>Você acorda às 3h da manhã com um alerta do PagerDuty. O pipeline crítico da diretoria capotou. O motivo? Alguém no time de backend renomeou a coluna <code>user_status</code> para <code>status_usuario</code> no PostgreSQL de produção, e suas DAGs do Airflow travaram feio. </p>
+<p>Isso acontece todo dia na maioria das empresas. E a nossa resposta, historicamente, tem sido encher a arquitetura de band-aids. Criamos milhares de testes do Great Expectations, do dbt, checagens de nulidade e de formato... tudo rodando <em>depois</em> que a ingestão acontece. Mas convenhamos: testar a estrutura do dado apenas no ambiente analítico é como verificar se os freios funcionam jogando o carro ladeira abaixo.</p>
+<p>Precisamos tratar dados com o mesmo rigor que a engenharia de software trata APIs. Quando um dev quebra um contrato de API REST, o código não compila, a esteira barra o deploy. Por que com dados o erro só estoura no dashboard do CEO?</p>
+<p>É por isso que a adoção de Data Contracts no modelo <em>Shift-Left</em> (nível de compilação) é a única saída sustentável. Significa que, se um engenheiro de software remover uma coluna transacional sem atualizar o contrato de dados, a esteira de CI/CD quebra no Pull Request <em>dele</em>. O erro não vira um bug de produção. O lixo nem chega no data warehouse. E, o mais importante, você volta a dormir 8 horas por noite.</p>
+<hr />
+<p><strong>📡 Radar: O Que Você Precisa Saber</strong></p>
+<ul>
+<li><strong>🛠️ A ascensão de validadores estáticos de contrato</strong></li>
+<li><em>O que é:</em> O uso crescente de ferramentas open-source (como o Data Contract CLI) que checam especificações YAML de dados diretamente nos pipelines do GitHub/GitLab.</li>
+<li>
+<p><em>O Impacto:</em> Tira a responsabilidade das falhas estruturais exclusivamente das costas da Engenharia de Dados. O contrato se torna um artefato bloqueante no deploy dos microserviços. Se o backend viola o acordo, o microserviço não sobe.</p>
+</li>
+<li>
+<p><strong>🔄 Shift-Left não é tecnologia, é política</strong></p>
+</li>
+<li><em>O que é:</em> O movimento de puxar o controle de qualidade para o extremo esquerdo do fluxo — direto na origem, antes da emissão do dado.</li>
+<li>
+<p><em>O Impacto:</em> O YAML é fácil. O inferno é convencer o dev transacional de que a tabela interna dele também é uma API pública para uso analítico. Implementar contratos de dados sem um patrocínio forte da diretoria vira apenas mais uma burocracia ignorada pelo time de engenharia.</p>
+</li>
+<li>
+<p><strong>🔗 Schema Registry já fazia isso</strong></p>
+</li>
+<li><em>O que é:</em> Validar schemas de eventos (Avro/Protobuf) antes de o produtor publicar a mensagem no Apache Kafka.</li>
+<li><em>O Impacto:</em> Se você tem uma arquitetura orientada a eventos bem desenhada, o schema registry já age como um Data Contract de compilação. Se o payload não respeitar o schema, o broker simplesmente rejeita a mensagem. Ponto para o streaming.</li>
+</ul>
+<hr />
+<p><strong>🛠️ Mão na Massa (Pragmatismo)</strong></p>
+<p>Quer validar um contrato de dados amanhã sem pedir orçamento para comprar ferramentas SaaS gigantescas? Comece simples.</p>
+<p>Não mude a arquitetura inteira. Crie um arquivo <code>vendas_data_contract.json</code> (usando JSON Schema) no repositório do backend. Especifique as colunas intocáveis e seus tipos (ex: <code>user_id</code>, <code>amount</code>, <code>currency</code>).</p>
+<p>Adicione um step rápido no GitHub Actions do time de software. Use uma ferramenta leve como o <code>ajv-cli</code> (validador de JSON) ou escreva um script Python de 20 linhas que bate o DDL das migrações do banco (como o Alembic ou Flyway) contra o seu JSON.</p>
+<p>Se a migração do PR renomeia o <code>user_id</code> e quebra o contrato, a action fica vermelha. Você acaba de implementar a fundação do shift-left.</p>
+<hr />
+<p><strong>💬 Debate da Semana</strong></p>
+<p>Sejamos honestos: se um pipeline quebra porque o engenheiro de software alterou a estrutura do banco relacional sem documentar ou avisar ninguém... de quem deveria ser o pager tocando na madrugada? Do Engenheiro de Dados ou do Desenvolvedor Backend que gerou a quebra?</p>
+<p>Deixe sua opinião lá nos comentários da edição de hoje.</p>
+    </div>
+    <script>
+        function copyContent(linkElement) {
+            const contentDiv = document.getElementById('content');
+            const range = document.createRange();
+            range.selectNodeContents(contentDiv);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                linkElement.innerHTML = '✔ Copiado! Agora cole (Ctrl+V) no LinkedIn';
+                linkElement.style.background = '#057642'; 
+                setTimeout(function() { selection.removeAllRanges(); }, 100);
+            } catch (err) {
+                alert('Erro ao copiar: ' + err);
+            }
+        }
+    </script>
+</body>
+</html>

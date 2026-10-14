@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Preview da Newsletter</title>
+<style>
+  body { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; color: #000; }
+  .content-wrapper { border: 1px solid #ddd; padding: 40px; border-radius: 8px; background: #fff; margin-bottom: 20px; }
+  .copy-button { display: block; width: 100%; padding: 15px; background: #0a66c2; color: white; border: none; border-radius: 24px; font-size: 16px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; margin-bottom: 20px; }
+  .copy-button:hover { background: #004182; }
+  h1 { font-size: 24px; margin-bottom: 16px; }
+  h2 { font-size: 20px; margin-top: 24px; margin-bottom: 16px; }
+  p { margin-bottom: 16px; }
+  ul { margin-bottom: 16px; }
+  li { margin-bottom: 8px; }
+  strong { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<a href="https://www.linkedin.com/post/new" target="_blank" class="copy-button" onclick="copyRichText()">
+  Copiar Texto Formatado e Abrir LinkedIn
+</a>
+
+
+<div class="seo-box" style="background: #f8f9fa; border-left: 4px solid #0a66c2; padding: 20px; margin-bottom: 20px; border-radius: 4px; font-family: sans-serif;">
+    <h3 style="margin-top: 0; color: #0a66c2;">⚙️ Metadados de SEO para o LinkedIn</h3>
+    <p><strong>Título SEO:</strong> A Inflação de Cargos e o Falso Cientista de Dados</p>
+    <p><strong>Descrição SEO:</strong> Descubra como a inflação de títulos prejudica o mercado de tecnologia. Ser cientista de dados exige muito mais do que rodar um modelo simples no scikit-learn.</p>
+    <p style="font-size: 12px; color: #666;">* Copie estes dados manualmente para a área de SEO do LinkedIn. O botão azul copiará apenas o texto do artigo.</p>
+    <hr style="border: none; border-top: 1px solid #ddd; margin: 15px 0;">
+    <h4 style="margin: 0 0 8px 0; color: #0a66c2;">📢 Post de Divulgação ("Conte para sua rede..."):</h4>
+    <div style="background: #fff; border: 1px solid #ccc; padding: 12px; border-radius: 4px; font-size: 14px; white-space: pre-wrap; line-height: 1.5; color: #111;">Promover profissionais para cargos de liderança técnica com menos de dois anos de mercado virou um atalho comum para reter talentos sem pagar salários proporcionais. Mas o custo dessa conta chegou.
+
+Na edição desta semana da Decifrando Dados, analiso a volta da cobrança por fundamentos estatísticos sólidos e o fim da era em que dar fit/predict no scikit-learn bastava para ser chamado de cientista.
+
+Leia a edição completa abaixo e deixe sua opinião nos comentários.
+
+#cienciadedados #estatistica #carreiratech #machinelearning #dados</div>
+</div>
+<div class="content-wrapper" id="newsletter-content">
+<h1>🧠 O Insight da Semana: A inflação de títulos e o cientista de dados de scikit-learn.</h1>
+<p>Se você abrir o LinkedIn agora, vai achar gente com 18 meses de carreira ostentando o cargo de "Lead AI Specialist" ou "Senior Data Scientist". Durante a corrida do ouro tech, as empresas descobriram que era mais barato promover o ego das pessoas com títulos pomposos do que pagar salários compatíveis. O mercado comprou a ideia.</p>
+<p>O problema é que dar um fit e predict no scikit-learn dentro de um notebook não torna ninguém cientista. Se tirarem o código pronto da internet, sobra muito pouco rigor metodológico. Falta formular um teste de hipótese sem viés, calcular tamanho amostral mínimo ou entender se a distribuição dos dados de treino realmente se sustenta em produção.</p>
+<p>A conta dessa farra chegou. As empresas pararam de bancar laboratórios de testes sem fim. Hoje, um cientista de dados que não entende a restrição financeira do negócio e não consegue defender o valor econômico do seu modelo perde o cargo para um analista pleno que escreve um SQL limpo e resolve o problema em duas horas.</p>
+
+<h1>📡 Radar: O Que Você Precisa Saber</h1>
+<ul>
+<li><strong>📉 O Fim dos Projetos de "Pesquisa Sem Fim"</strong></li>
+<li><em>O que é:</em> Redução drástica de equipes dedicadas a modelos puramente teóricos sem prazo de entrega no mundo corporativo.</li>
+<li><p><em>O Impacto:</em> O mercado quer saber se o modelo aumenta a conversão ou corta custo. Se o projeto demora seis meses para sair do laboratório, o orçamento é cortado antes do deploy.</p></li>
+
+<li><strong>🔬 Retorno do Rigor Estatístico Básico</strong></li>
+<li><em>O que é:</em> Revalorização do bom e velho teste A/B, cálculo de p-valor correto e inferência causal, contra o vício de jogar tudo numa rede neural sem entender a causa.</li>
+<li><p><em>O Impacto:</em> Quem domina fundamentos estatísticos sólidos toma decisões melhores com dados pequenos do que quem precisa de terabytes para treinar um modelo cego.</p></li>
+
+<li><strong>⚙️ O Cientista de Dados Full-Cycle</strong></li>
+<li><em>O que é:</em> A exigência de que o cientista saiba embrulhar sua própria lógica em uma API funcional (FastAPI/Docker) e monitorar drift em produção.</li>
+<li><p><em>O Impacto:</em> O abismo entre a equipe de ciência e a de engenharia encolheu. Jogar o notebook "por cima do muro" para o time de engenharia se virar virou motivo de demissão.</p></li>
+</ul>
+
+<h1>🛠️ Mão na Massa: O Teste da Baseline Ingênua</h1>
+<p>Antes de gastar duas semanas ajustando hiperparâmetros de um XGBoost, faça a validação da linha de base:</p>
+<ol>
+<li>Crie um preditor ingênuo: a média histórica dos últimos 30 dias, a moda da categoria ou uma regra simples baseada no bom senso do negócio.</li>
+<li>Compare o erro do seu modelo contra essa regra básica.</li>
+<li>Calcule o custo de infraestrutura para manter o modelo complexo rodando versus a melhoria real na métrica de negócio.</li>
+</ol>
+<p>Se a melhoria do modelo não cobrir os custos de infraestrutura e manutenção da esteira, implemente a regra simples e parta para outro problema.</p>
+
+<h1>💬 Debate da Semana</h1>
+<p>Você sente que a inflação de títulos atrapalha mais as empresas na hora de contratar ou os próprios profissionais, que acreditam estar prontos para desafios que exigem anos de bagagem?</p>
+</div>
+
+<script>
+function copyRichText() {
+    const content = document.getElementById('newsletter-content');
+    const range = document.createRange();
+    range.selectNodeContents(content);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    
+    document.execCommand('copy');
+    
+    selection.removeAllRanges();
+    
+    const btn = document.querySelector('.copy-button');
+    const originalText = btn.innerText;
+    btn.innerText = 'Copiado! 🎉';
+    setTimeout(() => btn.innerText = originalText, 3000);
+}
+</script>
+</body>
+</html>
