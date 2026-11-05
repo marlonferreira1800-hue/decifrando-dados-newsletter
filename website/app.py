@@ -4,17 +4,24 @@ import re
 import secrets
 from functools import wraps
 
-from flask import (
-    Flask,
-    abort,
-    current_app,
-    flash,
-    redirect,
-    render_template,
-    request,
-    session,
-    url_for,
-)
+try:
+    from flask import (
+        Flask,
+        abort,
+        current_app,
+        flash,
+        redirect,
+        render_template,
+        request,
+        session,
+        url_for,
+    )
+except ImportError:
+    raise SystemExit(
+        "Dependencia 'flask' nao encontrada.\n"
+        "Instale com: pip install -r requirements.txt\n"
+        "No Windows, basta dar dois cliques em run.bat (dentro de website/)."
+    )
 
 from db import agora, get_db, init_db, registrar_fechamento
 from mailer import get_mailer

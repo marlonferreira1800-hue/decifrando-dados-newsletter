@@ -30,6 +30,20 @@ Abra <http://127.0.0.1:5000>. Na primeira execução, as edições existentes em
 `../publicacoes/*.html` são importadas automaticamente para o arquivo do site
 (guardadas em `website/newsletter.db`, que não vai para o git).
 
+Atalhos prontos: no Windows, dois cliques em `run.bat`; no Linux/Mac, `./run.sh`.
+
+## Não está abrindo? Solução de problemas
+
+- **`python` não é reconhecido / abre a Microsoft Store** → instale o Python 3.10+
+  em <https://python.org> marcando **"Add Python to PATH"** na instalação.
+- **`ModuleNotFoundError: No module named 'flask'`** → rode
+  `pip install -r requirements.txt` (ou use `run.bat` / `run.sh`, que instalam as dependências sozinhos).
+- **Rode a partir da pasta certa** — `python app.py` funciona dentro de `website/`
+  (ou `python website/app.py` a partir da raiz do repositório não funciona; use os atalhos).
+- **Abra a URL certa no navegador**: <http://127.0.0.1:5000> (não abra o arquivo HTML direto).
+- **Porta 5000 ocupada** → `PORT=8000 python app.py` e abra <http://127.0.0.1:8000>.
+- **A janela do servidor fechou** → não feche a janela preta do terminal; é ela que mantém o site no ar.
+
 ## Variáveis de ambiente
 
 | Variável | Padrão | Descrição |
