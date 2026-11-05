@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Inscritos — {{ config.SITE_NAME }}{% endblock %}
+{% block conteudo %}
+<p class="voltar"><a href="{{ url_for('admin_painel') }}">← Painel</a></p>
+<h1>Inscritos ({{ inscritos | length }})</h1>
+{% if inscritos %}
+<table class="tabela">
+  <thead><tr><th>E-mail</th><th>Status</th><th>Desde</th><th></th></tr></thead>
+  <tbody>
+  {% for ins in inscritos %}
+    <tr>
+      <td>{{ ins['email'] }}</td>
+      <td>{% if ins['ativo'] %}<span class="badge publicada">ativo</span>{% else %}<span class="badge rascunho">inativo</span>{% endif %}</td>
+      <td>{{ ins['criado_em'][:10] }}</td>
+      <td>
+        <form method="post" action="{{ url_for('admin_inscrito_remover', inscrito_id=ins['id']) }}" class="inline" onsubmit="return confirm('Remover {{ ins['email'] }}?');">
+          <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+          <button class="acao botao-mini perigo" type="submit">Remover</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Nenhum inscrito ainda.</p>
+{% endif %}
+{% endblock %}

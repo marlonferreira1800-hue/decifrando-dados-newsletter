@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar edição #' ~ edicao['numero'] if edicao else 'Nova edição' }} — {{ config.SITE_NAME }}{% endblock %}
+{% block head_extra %}<script src="{{ url_for('static', filename='editor.js') }}" defer></script>{% endblock %}
+{% block conteudo %}
+<h1>{{ 'Editar edição #' ~ edicao['numero'] if edicao else 'Nova edição' }}</h1>
+
+<form method="post" class="form-editor" id="form-edicao">
+  <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+  <input type="hidden" name="conteudo_html" id="conteudo_html" value="">
+  <div class="linha-campos">
+    <div class="campo">
+      <label for="numero">Número</label>
+      <input type="text" id="numero" name="numero" value="{{ edicao['numero'] if edicao else numero_sugerido }}" {% if edicao %}readonly{% endif %} required pattern="[0-9]+" title="Somente números">
+    </div>
+    <div class="campo campo-largo">
+      <label for="titulo">Título</label>
+      <input type="text" id="titulo" name="titulo" value="{{ edicao['titulo'] if edicao else '' }}" required maxlength="300">
+    </div>
+  </div>
+  <div class="campo">
+    <label for="assunto">Assunto do e-mail (opcional)</label>
+    <input type="text" id="assunto" name="assunto" value="{{ edicao['assunto'] if edicao else '' }}" maxlength="300" placeholder="Decifrando Dados — Edição #{{ edicao['numero'] if edicao else numero_sugerido }}: título">
+  </div>
+
+  <label>Conteúdo</label>
+  <div class="toolbar" id="toolbar">
+    <button type="button" data-cmd="bold"><strong>B</strong></button>
+    <button type="button" data-cmd="italic"><em>I</em></button>
+    <button type="button" data-cmd="underline"><u>U</u></button>
+    <button type="button" data-cmd="formatBlock" data-val="h2">H2</button>
+    <button type="button" data-cmd="formatBlock" data-val="h3">H3</button>
+    <button type="button" data-cmd="formatBlock" data-val="p">P</button>
+    <button type="button" data-cmd="insertUnorderedList">• Lista</button>
+    <button type="button" data-cmd="insertOrderedList">1. Lista</button>
+    <button type="button" data-cmd="createLink">🔗 Link</button>
+    <button type="button" data-cmd="removeFormat">Limpar</button>
+  </div>
+  <div id="editor" class="editor" contenteditable="true">{{ (edicao['conteudo_html'] if edicao else '') | safe }}</div>
+
+  <div class="acoes-editor">
+    <button type="submit" class="botao">Salvar</button>
+    <a class="botao-secundario" href="{{ url_for('admin_painel') }}">Voltar</a>
+  </div>
+</form>
+
+<h2>Prévia</h2>
+<iframe id="preview" class="frame-preview" sandbox="allow-same-origin" title="Prévia da edição"></iframe>
+{% endblock %}

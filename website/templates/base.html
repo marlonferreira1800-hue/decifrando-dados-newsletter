@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{{ config.SITE_NAME }}{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% block head_extra %}{% endblock %}
+</head>
+<body>
+<header class="topo">
+  <a class="marca" href="{{ url_for('index') }}">{{ config.SITE_NAME }}</a>
+  <nav class="nav">
+    <a href="{{ url_for('index') }}">Início</a>
+    <a href="{{ url_for('edicoes') }}">Edições</a>
+    {% if session.get('admin') %}
+    <a href="{{ url_for('admin_painel') }}">Painel</a>
+    <form method="post" action="{{ url_for('admin_logout') }}" class="inline">
+      <button type="submit" class="link-botao">Sair</button>
+    </form>
+    {% else %}
+    <a href="{{ url_for('admin_login') }}">Admin</a>
+    {% endif %}
+  </nav>
+</header>
+<main class="container">
+{% with mensagens = get_flashed_messages(with_categories=true) %}
+{% if mensagens %}
+<ul class="flashes">
+  {% for categoria, msg in mensagens %}
+  <li class="flash {{ categoria }}">{{ msg }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% block conteudo %}{% endblock %}
+</main>
+<footer class="rodape">
+  <p><strong>{{ config.SITE_NAME }}</strong> — {{ config.SITE_TAGLINE }}</p>
+</footer>
+</body>
+</html>
