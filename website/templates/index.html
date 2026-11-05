@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ config.SITE_NAME }} — Newsletter de Dados e IA{% endblock %}
+{% block conteudo %}
+<section class="hero">
+  <h1>{{ config.SITE_NAME }}</h1>
+  <p class="tagline">{{ config.SITE_TAGLINE }}</p>
+  <p class="descricao">
+    Ciência de Dados, Machine Learning, Engenharia de Dados e IA desmistificados:
+    sem academicismo, com foco em impacto prático real.
+  </p>
+  <form id="inscricao" class="form-inscricao" method="post" action="{{ url_for('inscrever_se') }}">
+    <input type="email" name="email" placeholder="seu@email.com" required maxlength="254">
+    <button type="submit">Quero receber</button>
+  </form>
+  <p class="contador">{{ total_edicoes }} edições publicadas · {{ total_inscritos }} inscritos ativos</p>
+</section>
+
+<section>
+  <h2>Edições recentes</h2>
+  {% if recentes %}
+  <div class="cards">
+    {% for ed in recentes %}
+    <a class="card" href="{{ url_for('ver_edicao', edicao_id=ed['id']) }}">
+      <span class="numero">Edição #{{ ed['numero'] }}</span>
+      <span class="titulo-card">{{ ed['titulo'] }}</span>
+      {% if ed['publicada_em'] %}<span class="data">{{ ed['publicada_em'][:10] }}</span>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p>Ainda não há edições publicadas. <a href="{{ url_for('edicoes') }}">Ver arquivo</a>.</p>
+  {% endif %}
+  <p><a class="botao-secundario" href="{{ url_for('edicoes') }}">Ver todas as edições →</a></p>
+</section>
+{% endblock %}

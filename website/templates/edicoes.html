@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Edições — {{ config.SITE_NAME }}{% endblock %}
+{% block conteudo %}
+<h1>Arquivo de edições</h1>
+{% if edicoes %}
+<ul class="lista-edicoes">
+  {% for ed in edicoes %}
+  <li>
+    <a href="{{ url_for('ver_edicao', edicao_id=ed['id']) }}">
+      <span class="numero">#{{ ed['numero'] }}</span>
+      <span class="titulo-lista">{{ ed['titulo'] }}</span>
+      {% if ed['publicada_em'] %}<span class="data">{{ ed['publicada_em'][:10] }}</span>{% endif %}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Nenhuma edição publicada ainda.</p>
+{% endif %}
+{% endblock %}

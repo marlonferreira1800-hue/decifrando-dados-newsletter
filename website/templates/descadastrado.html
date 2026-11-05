@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Descadastrado — {{ config.SITE_NAME }}{% endblock %}
+{% block conteudo %}
+<section class="caixa">
+  <h1>Tudo certo</h1>
+  <p>Seu e-mail foi descadastrado com sucesso. Você não receberá mais nossas edições.</p>
+  <p><a class="botao-secundario" href="{{ url_for('index') }}">Voltar ao site</a></p>
+</section>
+{% endblock %}

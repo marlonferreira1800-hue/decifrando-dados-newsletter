@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Descadastrar — {{ config.SITE_NAME }}{% endblock %}
+{% block conteudo %}
+<section class="caixa">
+  <h1>Descadastrar</h1>
+  <p>Confirma que <strong>{{ inscrito['email'] }}</strong> não deve mais receber a newsletter {{ config.SITE_NAME }}?</p>
+  <form method="post" action="{{ url_for('descadastrar_confirma', token=token) }}">
+    <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+    <button type="submit" class="botao-perigo">Sim, quero descadastrar</button>
+    <a class="botao-secundario" href="{{ url_for('index') }}">Cancelar</a>
+  </form>
+</section>
+{% endblock %}

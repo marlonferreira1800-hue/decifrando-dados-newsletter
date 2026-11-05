@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Edição #{{ edicao['numero'] }} — {{ edicao['titulo'] }}{% endblock %}
+{% block conteudo %}
+<article class="edicao">
+  <p class="voltar"><a href="{{ url_for('edicoes') }}">← Todas as edições</a></p>
+  <h1>{{ edicao['titulo'] }}</h1>
+  <p class="meta">Edição #{{ edicao['numero'] }}{% if edicao['publicada_em'] %} · publicada em {{ edicao['publicada_em'][:10] }}{% endif %}{% if modo_admin %} · <strong>prévia do admin</strong>{% endif %}</p>
+  {% if edicao['documento_completo'] %}
+  <iframe class="frame-edicao" sandbox srcdoc="{{ edicao['conteudo_html'] }}" title="Edição #{{ edicao['numero'] }}"></iframe>
+  {% else %}
+  <div class="conteudo-edicao">{{ edicao['conteudo_html'] | safe }}</div>
+  {% endif %}
+</article>
+{% endblock %}

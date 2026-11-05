@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Admin — {{ config.SITE_NAME }}{% endblock %}
+{% block conteudo %}
+<section class="caixa caixa-login">
+  <h1>Área do editor</h1>
+  <form method="post" action="{{ url_for('admin_login_post', next=request.args.get('next')) }}">
+    <label for="senha">Senha de administrador</label>
+    <input type="password" id="senha" name="senha" required autofocus>
+    <button type="submit">Entrar</button>
+  </form>
+</section>
+{% endblock %}

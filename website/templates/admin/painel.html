@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Painel — {{ config.SITE_NAME }}{% endblock %}
+{% block conteudo %}
+<h1>Painel do editor</h1>
+
+<div class="stats">
+  <div class="stat"><span class="stat-num">{{ stats['edicoes'] }}</span><span class="stat-label">edições</span></div>
+  <div class="stat"><span class="stat-num">{{ stats['rascunhos'] }}</span><span class="stat-label">rascunhos</span></div>
+  <div class="stat"><span class="stat-num">{{ stats['inscritos'] }}</span><span class="stat-label">inscritos ativos</span></div>
+</div>
+
+<p>
+  <a class="botao" href="{{ url_for('admin_edicao_nova') }}">+ Nova edição</a>
+  <a class="botao-secundario" href="{{ url_for('admin_inscritos') }}">Ver inscritos</a>
+</p>
+
+{% if edicoes %}
+<table class="tabela">
+  <thead>
+    <tr><th>#</th><th>Título</th><th>Status</th><th>Publicada</th><th>Enviada</th><th>Ações</th></tr>
+  </thead>
+  <tbody>
+  {% for ed in edicoes %}
+    <tr>
+      <td>{{ ed['numero'] }}</td>
+      <td>{{ ed['titulo'] }}</td>
+      <td><span class="badge {{ ed['status'] }}">{{ ed['status'] }}</span></td>
+      <td>{{ ed['publicada_em'][:10] if ed['publicada_em'] else '—' }}</td>
+      <td>{{ ed['enviada_em'][:10] if ed['enviada_em'] else '—' }}</td>
+      <td class="acoes">
+        <a class="acao" href="{{ url_for('admin_edicao_editar', edicao_id=ed['id']) }}">Editar</a>
+        <a class="acao" href="{{ url_for('admin_edicao_visualizar', edicao_id=ed['id']) }}">Prévia</a>
+        {% if ed['status'] != 'publicada' %}
+        <form method="post" action="{{ url_for('admin_edicao_publicar', edicao_id=ed['id']) }}" class="inline">
+          <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+          <button class="acao botao-mini ok" type="submit">Publicar</button>
+        </form>
+        {% endif %}
+        <form method="post" action="{{ url_for('admin_edicao_enviar', edicao_id=ed['id']) }}" class="inline bloco-envio">
+          <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+          <select name="modo">
+            <option value="todos">Enviar p/ todos</option>
+            <option value="teste">Enviar teste</option>
+          </select>
+          <input type="email" name="email_teste" placeholder="e-mail de teste" class="campo-teste">
+          <button class="acao botao-mini" type="submit">Enviar</button>
+        </form>
+        <a class="acao" href="{{ url_for('admin_envios', edicao_id=ed['id']) }}">Envios</a>
+        <form method="post" action="{{ url_for('admin_edicao_excluir', edicao_id=ed['id']) }}" class="inline" onsubmit="return confirm('Excluir a edição #{{ ed['numero'] }}?');">
+          <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+          <button class="acao botao-mini perigo" type="submit">Excluir</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Nenhuma edição ainda. <a href="{{ url_for('admin_edicao_nova') }}">Crie a primeira</a>.</p>
+{% endif %}
+{% endblock %}
